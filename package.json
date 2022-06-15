@@ -1,0 +1,98 @@
+{
+  "name": "@sanity/dashboard",
+  "version": "3.0.0-v3-studio.0",
+  "description": "Tool for rendering dashboard widgets",
+  "source": "./src/index.tsx",
+  "exports": {
+    ".": {
+      "require": "./lib/cjs/index.js",
+      "default": "./lib/esm/index.js"
+    }
+  },
+  "main": "./lib/cjs/index.js",
+  "module": "./lib/esm/index.js",
+  "types": "./lib/types/index.d.ts",
+  "files": [
+    "src",
+    "lib",
+    "v2-incompatible.js",
+    "sanity.json"
+  ],
+  "author": "Sanity.io <hello@sanity.io>",
+  "license": "MIT",
+  "scripts": {
+    "clean": "rimraf lib",
+    "prebuild": "npm run clean && plugin-kit verify-package --silent",
+    "build": "parcel build --no-cache",
+    "watch": "parcel watch",
+    "link-watch": "plugin-kit link-watch",
+    "format": "prettier src -w",
+    "prepare": "husky install",
+    "compile": "tsc --noEmit",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "sanity",
+    "cms",
+    "headless",
+    "realtime",
+    "content",
+    "dashboard",
+    "sanity-plugin",
+    "sanity-tool"
+  ],
+  "dependencies": {
+    "@sanity/icons": "^1.2.8",
+    "@sanity/image-url": "^1.0.1",
+    "@sanity/incompatible-plugin": "^0.0.1-studio-v3.1",
+    "@sanity/ui": "^0.37.9",
+    "lodash": "^4.17.21",
+    "rxjs": "^6.5.3"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^16.1.0",
+    "@commitlint/config-conventional": "^15.0.0",
+    "@parcel/packager-ts": "^2.6.0",
+    "@parcel/transformer-typescript-types": "^2.6.0",
+    "@sanity/plugin-kit": "^0.0.1-studio-v3.4",
+    "@types/styled-components": "^5.1.25",
+    "@typescript-eslint/eslint-plugin": "^5.12.0",
+    "@typescript-eslint/parser": "^5.12.0",
+    "eslint": "^8.7.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-config-sanity": "^5.1.0",
+    "eslint-plugin-prettier": "4.0.0",
+    "eslint-plugin-react": "^7.28.0",
+    "eslint-plugin-react-hooks": "^4.5.0",
+    "husky": "^7.0.0",
+    "lint-staged": "^12.3.3",
+    "parcel": "^2.6.0",
+    "prettier": "^2.5.1",
+    "react": "^17.0.0 || ^18.0.0",
+    "rimraf": "^3.0.2",
+    "sanity": "^3.0.0-dev-preview.7",
+    "styled-components": "^5.3.5",
+    "typescript": "^4.7.3"
+  },
+  "peerDependencies": {
+    "react": "^17.0.0 || ^18.0.0",
+    "sanity": "dev-preview",
+    "styled-components": "^5.2.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sanity-io/dashboard.git",
+    "directory": "packages/@sanity/dashboard"
+  },
+  "sanityExchangeUrl": "https://www.sanity.io/exchange/dashboard",
+  "bugs": {
+    "url": "https://github.com/sanity-io/dashboard/issues"
+  },
+  "homepage": "https://www.sanity.io/",
+  "directories": {
+    "lib": "lib"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}

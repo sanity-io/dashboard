@@ -20,11 +20,11 @@ The Dashboard itself is mostly concerned about the layout of the configured widg
 
 In your Sanity Content Studio run:
 
-`npm install --save @sanity/dashboard@sanity-v3`
+`npm install --save @sanity/dashboard@studio-v3`
 
 or
 
-`yarn add @sanity/dashboard@sanity-v3`
+`yarn add @sanity/dashboard@studio-v3`
 
 ## Basic usage
 In `sanity.config.js` (or .ts), add the dashboard tool to the createConfig plugins array:

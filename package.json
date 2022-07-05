@@ -1,6 +1,6 @@
 {
   "name": "@sanity/dashboard",
-  "version": "3.0.0-v3-studio.0",
+  "version": "3.0.0-v3-studio.1",
   "description": "Tool for rendering dashboard widgets",
   "source": "./src/index.tsx",
   "exports": {

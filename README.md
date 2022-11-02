@@ -1,3 +1,17 @@
+## Installation
+
+```
+npm install --save @sanity/dashboard@studio-v3
+```
+
+or
+
+```
+yarn add @sanity/dashboard@studio-v3
+```
+
+## Usage
+
 # Sanity Dashboard
 
 > **NOTE**
@@ -27,12 +41,12 @@ or
 `yarn add @sanity/dashboard@studio-v3`
 
 ## Basic usage
-In `sanity.config.js` (or .ts), add the dashboard tool to the createConfig plugins array:
+In `sanity.config.js` (or .ts), add the dashboard tool to the defineConfig plugins array:
 
 ```ts
-import { createConfig } from "sanity";
+import { defineConfig } from "sanity";
 import { dashboardTool } from "@sanity/dashboard";
-export default createConfig({
+export default defineConfig({
     /* ... */
     plugins: [
         dashboardTool({ widgets: []})
@@ -48,7 +62,7 @@ It should show an empty dashboard, with a message encouraging you to add some wi
 Now, add any widgets you might want. The dashboard plugin provides three widgets out-of-the-box:
 
 ```ts
-import { createConfig } from "sanity";
+import { defineConfig } from "sanity";
 import {
   dashboardTool,
   sanityTutorialsWidget,
@@ -188,3 +202,23 @@ Make sure to select the main branch and check "Release new version".
 
 Semantic release will only release on configured branches, so it is safe to run release on any branch.
 
+
+
+## License
+
+MIT-licensed. See LICENSE.
+
+## Develop & test
+
+This plugin uses [@sanity/plugin-kit](https://github.com/sanity-io/plugin-kit)
+with default configuration for build & watch scripts.
+
+See [Testing a plugin in Sanity Studio](https://github.com/sanity-io/plugin-kit#testing-a-plugin-in-sanity-studio)
+on how to run this plugin with hotreload in the studio.
+
+### Release new version
+
+Run ["CI & Release" workflow](https://github.com/sanity-io/dashboard/actions/workflows/main.yml).
+Make sure to select the main branch and check "Release new version".
+
+Semantic release will only release on configured branches, so it is safe to run release on any branch.

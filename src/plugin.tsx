@@ -1,6 +1,6 @@
 import React, {CSSProperties} from 'react'
 import {Dashboard} from './containers/Dashboard'
-import {createPlugin} from 'sanity'
+import {definePlugin} from 'sanity'
 import {DashboardConfig, DashboardWidget, LayoutConfig} from './types'
 
 const strokeStyle: CSSProperties = {
@@ -24,12 +24,6 @@ const DashboardIcon = () => (
   </svg>
 )
 
-export * from './types'
-export * from './components/DashboardWidgetContainer'
-export * from './widgets/projectInfo'
-export * from './widgets/projectUsers'
-export * from './widgets/sanityTutorials'
-
 export interface DashboardPluginConfig {
   widgets?: DashboardWidget[]
 
@@ -39,7 +33,7 @@ export interface DashboardPluginConfig {
   defaultLayout?: LayoutConfig
 }
 
-export const dashboardTool = createPlugin<DashboardPluginConfig>((config = {}) => {
+export const dashboardTool = definePlugin<DashboardPluginConfig>((config = {}) => {
   const pluginConfig: DashboardConfig = {
     layout: config.defaultLayout ?? {},
     widgets: config.widgets ?? [],

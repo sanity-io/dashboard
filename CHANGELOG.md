@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.0-v3-studio.6](https://github.com/sanity-io/dashboard/compare/v3.0.0-v3-studio.5...v3.0.0-v3-studio.6) (2022-11-02)
+
+### Bug Fixes
+
+- compiled for sanity 3.0.0-rc.0 ([74dfd9a](https://github.com/sanity-io/dashboard/commit/74dfd9a3db922649f32e52f990a80c5de7d1a752))
+
 ## [3.0.0-v3-studio.5](https://github.com/sanity-io/dashboard/compare/v3.0.0-v3-studio.4...v3.0.0-v3-studio.5) (2022-10-27)
 
 ### Bug Fixes

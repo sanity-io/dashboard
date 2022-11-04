@@ -5,6 +5,14 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.0-v3-studio.7](https://github.com/sanity-io/dashboard/compare/v3.0.0-v3-studio.6...v3.0.0-v3-studio.7) (2022-11-04)
+
+### Bug Fixes
+
+- **deps:** pin dependencies ([5fc3f9d](https://github.com/sanity-io/dashboard/commit/5fc3f9d276116dffcc957ed39b3a3e876a479fbf))
+- **deps:** update dependency @sanity/icons to v1.3.9-beta.3 ([#12](https://github.com/sanity-io/dashboard/issues/12)) ([b547871](https://github.com/sanity-io/dashboard/commit/b5478710f11d58d898e1eaf638b702dece12edaa))
+- **deps:** update dependency rxjs to ^6.6.7 ([#4](https://github.com/sanity-io/dashboard/issues/4)) ([b79f4be](https://github.com/sanity-io/dashboard/commit/b79f4bec0661c32f8b1a797f82ea22195ec583d9))
+
 ## [3.0.0-v3-studio.6](https://github.com/sanity-io/dashboard/compare/v3.0.0-v3-studio.5...v3.0.0-v3-studio.6) (2022-11-02)
 
 ### Bug Fixes

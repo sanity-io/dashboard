@@ -1,134 +1,90 @@
-# Sanity Dashboard
+# Dashboard
 
-> **NOTE**
->
-> This is the **Sanity Studio v3 version** of @sanity/dashboard.
->
-> For the v2 version, please refer to the [v2-branch](https://github.com/sanity-io/sanity/tree/next/packages/%40sanity/dashboard).
+Dashboard is a Sanity Content Studio Tool which picks up and renders any widgets which implement `part:@sanity/dashboard/widget`. Install this plugin in your Studio to display stats about your project, recently edited documents, etc.
 
-## What is it?
-
-Dashboard is a Sanity Content Studio Tool which renders any widgets configured for it. 
-Install this plugin in your Studio to display stats about your project, recently edited documents, etc.
-
-The Dashboard tool has been designed to be as generic as possible, making few assumptions about its widgets. 
-The Dashboard itself is mostly concerned about the layout of the configured widgets.
-
-![Sanity dashboard](assets/dashboard.png)
+The Dashboard tool has been designed to be as generic as possible, making few assumptions about its widgets. The Dashboard itself is mostly concerned about the layout of the configured widgets.
 
 ## Install
 
-In your Sanity Content Studio run:
-
-`npm install --save @sanity/dashboard@sanity-v3`
-
-or
-
-`yarn add @sanity/dashboard@sanity-v3`
-
-## Basic usage
-In `sanity.config.js` (or .ts), add the dashboard tool to the createConfig plugins array:
-
-```ts
-import { createConfig } from "sanity";
-import { dashboardTool } from "@sanity/dashboard";
-export default createConfig({
-    /* ... */
-    plugins: [
-        dashboardTool({ widgets: []})
-    ]
-})
-```
-
-To verify that all is well, fire up your Studio (`sanity start`) and point your browser to `http://localhost:3333/dashboard`.
-It should show an empty dashboard, with a message encouraging you to add some widgets to the dashboard.
+- `cd` to your Content Studio
+- Type `sanity install @sanity/dashboard`. This will cause two things happen:
+  1. The Dashboard tool gets installed to `./node_modules` in your Studio
+  2. `@sanity/dashboard` is appended to the `plugins` array in the `sanity.json` file of your Studio
+- To verify that all is well, fire up your Studio (`sanity start`) and point your browser to `http://localhost:3333/dashboard`
+- \o/
 
 ## How to configure the Dashboard
 
-Now, add any widgets you might want. The dashboard plugin provides three widgets out-of-the-box:
+Changing what is rendered on your Dashboard is easy. To take control, do the following:
 
-```ts
-import { createConfig } from "sanity";
-import {
-  dashboardTool,
-  sanityTutorialsWidget,
-  projectUsersWidget,
-  projectInfoWidget,
-} from "@sanity/dashboard";
+1. Implement your own dashboardConfig. In your `sanity.json` file, append the following line to the `parts` array:
 
-
-// configure the dashboard tool with widgets
-dashboardTool({ 
-  widgets: [
-    sanityTutorialsWidget(),
-    projectInfoWidget(),
-    projectUsersWidget(),
-  ]
-})
+```json
+{
+  "implements": "part:@sanity/dashboard/config",
+  "path": "src/dashboardConfig.js"
+}
 ```
 
-Widgets can be configured by passing widget-specific config:
+2. Create the file `src/dashboardConfig.js` and make sure it's shaped something like this:
 
-```ts
-projectUsersWidget({layout: 'medium'})
+```js
+export default {
+  widgets: [{name: 'sanity-tutorials'}, {name: 'project-info'}, {name: 'project-users'}]
+}
 ```
+
+The `widgets` array is how you tell the Dashboard which widgets to render. The ones mentioned in the above example are bundled with Sanity and require no separate installation.
+
+3. Restart your Studio and play around with the order of the widgets array in `src/dashboardConfig.js`. You can also duplicate them, should you want multiple instances of the same widget (see below).
+
+A widget’s size behavior can be defined by adding a `layout` key to a the widget config. E.g.: `{name: 'project-users', layout: {width: 'full', height: 'small'}}`. Accepted values are `auto`, `small`, `medium`, `large` and `full`.
 
 ## How to install a widget
 
-Install a Dashboard widget as you would any npm package.
+Install a Dashboard widget as you would any other [Sanity Studio plugin](https://www.sanity.io/docs/extending/plugins).
 
 E.g. if you want to install the cats example widget mentioned below, proceed as follows:
 
-1. Run `yarn install @sanity/sanity-plugin-dashboard-widget-cats` in the studio directory
-2. Update your `sanity.config.js` by importing the widget and adding it to the widget array.
+1. Type `sanity install dashboard-widget-cats` in your terminal (this works because it's published on npm under the name `sanity-plugin-dashboard-widget-cats`)
+2. Update your `src/dashboardConfig.js` file by adding `{name: 'cats'}` to the `widgets` array
 3. You've got 🐱 in your Studio
 
-Some widgets have widget-specific options to change aspects of their behavior. 
-If you install the `@sanity/sanity-plugin-dashboard-widget-document-list` widget mentioned below, 
-it can be configured with:
+Some widgets allow options to change aspects of their behavior. If you install the document-list widget mentioned below, it can be configured with:
 
-```ts
-documentListWidget({
-  showCreateButton: true,
-  limit: 5,
-  types: ["my-document-type"],
-})
+```js
+{name: 'document-list', options: {title: 'Last edited books', order: '_updatedAt desc', types: ['book']}}
 ```
 
-You can add multiple instances of a widget with different configuration.
-So, if you want your dashboard to display both newest documents across all document types and 
-another widget showing the last edited books, dashboard config could look like this:
+Thus, if you want your dashboard to display both newest documents across all document types and another widget showing the last edited books, your dashboardConfig would look like this:
 
 ```js
 export default {
   widgets: [
-    documentListWidget({title: 'New', order: '_createdAt desc'}),
-    documentListWidget({title: 'Last edited books', order: '_updatedAt desc', types: ['book']}),
+    {name: 'document-list', options: {title: 'New', order: '_createdAt desc'}},
+    {
+      name: 'document-list',
+      options: {title: 'Last edited books', order: '_updatedAt desc', types: ['book']}
+    }
   ]
 }
 ```
 
 ## How to create a widget
 
-Widgets are simply objects that follow implement the [DashboardWidget](src/types.ts) interface. 
-Let's have a look at some sample widgets: 
+Widgets are Sanity plugins that implement the part `part:@sanity/dashboard/widget`. Stay tuned for a complete "Widget Authors Cookbook", but until then, have a look at some sample widgets: E.g. [A document List](https://github.com/sanity-io/dashboard-widget-document-list/tree/master) or [maybe some cats](https://github.com/sanity-io/example-dashboard-widget-cats)?
 
-For example, [a document list](https://github.com/sanity-io/dashboard-widget-document-list/tree/master) or 
-[maybe some cats](https://github.com/sanity-io/example-dashboard-widget-cats)?
+When writing your widget components, it's recommended to use the `DashboardWidget` component from the Sanity Studio by importing it like so: `import { DashboardWidget } from "@sanity/dashboard";`.
 
-When writing your widget components, it's recommended to use the `DashboardWidgetContainer` component from 
-this package by importing it like so: 
-`import { DashboardWidgetContainer } from "@sanity/dashboard";`.
-
-This gives you a typical widget component structure with basic styles, 
-and the option of presenting your content in the header, footer, or body of the widget.
+This gives you a typical widget component structure with basic styles, and the option of presenting your content in the header, footer, or body of the widget.
 
 If you need something more flexible you can create your own component.
 
 Setting up the widget with the default setup will give you a basic widget that looks something like this:
 
+
 ```js
-<DashboardWidgetContainer
+<DashboardWidget
   header="A cat"
   footer={
     <Flex direction="column" align="stretch">
@@ -146,7 +102,7 @@ Setting up the widget with the default setup will give you a basic widget that l
   <figure>
     <img src="https://placekitten.com/300/450" />
   </figure>
-</DashboardWidgetContainer>
+</DashboardWidget>
 ```
 
 ### More examples
@@ -159,39 +115,4 @@ You can study the source code of these widgets to get a sense of how you can app
 
 ---
 
-### Upgrading from v2
 
-If you were previously using @sanity/dashboard in a v2 Sanity Studio, will have to make the following changes:
-
-* Install the v3 version of @sanity/dashboard in the Studio
-* Install v3 versions of any widgets
-* Configure the dashboard as described above:
-  * Add dashboardTool to plugins array
-  * Add widgets to widgets configuration
-  * Move any config you had in v2 `dashboardConfiguration.js` on a widget-by-widget basis. 
-  * V2 used an options-object to pass widget-specific configuration. In v3, options have been replaced by
-   passing the same configuration directly to the widget-function.
-* Custom widget components should import DashboardWidgetContainer instead of DashboardWidget
-
-## Develop & test
-
-Make sure to run `npm run build` once, then run
-
-```bash
-npm run link-watch
-```
-
-In another shell, `cd` to your test studio and run:
-
-```bash
-npx yalc add @sanity/dashboard --link && yarn install
-```
-
-Now, changes in this repo will be automatically built and pushed to the studio,
-triggering hotreload. Yalc avoids issues with react-hooks that are typical when using yarn/npm link.
-
-  
-### About build & watch
-
-This plugin uses [@sanity/plugin-sdk](https://github.com/sanity-io/plugin-sdk)
-with default configuration for build & watch scripts.

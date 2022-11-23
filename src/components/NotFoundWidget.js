@@ -1,4 +1,5 @@
-import React, {PropsWithChildren, ReactNode} from 'react'
+import PropTypes from 'prop-types'
+import React from 'react'
 import {Card, Stack, Heading, Box} from '@sanity/ui'
 import styled from 'styled-components'
 
@@ -9,11 +10,7 @@ const Root = styled(Card)`
   height: 100%;
 `
 
-export type NotFoundWidgetProps = PropsWithChildren<{
-  title?: ReactNode
-}>
-
-export function NotFoundWidget(props: NotFoundWidgetProps) {
+function NotFoundWidget(props) {
   const {title, children} = props
   return (
     <Root radius={3} paddingX={3} paddingY={4} tone="critical">
@@ -28,3 +25,17 @@ export function NotFoundWidget(props: NotFoundWidgetProps) {
     </Root>
   )
 }
+
+NotFoundWidget.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
+  children: PropTypes.any,
+  // eslint-disable-next-line react/forbid-prop-types
+  title: PropTypes.any,
+}
+
+NotFoundWidget.defaultProps = {
+  children: null,
+  title: null,
+}
+
+export default NotFoundWidget

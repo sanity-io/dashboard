@@ -43,27 +43,34 @@ const Content = styled(Box)`
 
 interface DashboardWidgetProps {
   header?: string
+  className?: string
   children: React.ReactNode
   footer?: React.ReactNode
+  hideFooterBorder?: boolean
 }
 
-export const DashboardWidgetContainer = forwardRef(function DashboardWidgetContainer(
-  props: DashboardWidgetProps,
-  ref: React.Ref<HTMLDivElement>
-) {
-  const {header, children, footer} = props
+export const DashboardWidget = forwardRef(
+  (props: DashboardWidgetProps, ref: React.Ref<HTMLDivElement>) => {
+    const {header, children, footer, hideFooterBorder, className} = props
 
-  return (
-    <Root radius={3} display="flex" ref={ref}>
-      {header && (
-        <Header borderBottom paddingX={3} paddingY={4}>
-          <Heading size={1} textOverflow="ellipsis">
-            {header}
-          </Heading>
-        </Header>
-      )}
-      {children && <Content>{children}</Content>}
-      {footer && <Footer borderTop>{footer}</Footer>}
-    </Root>
-  )
-})
+    return (
+      <Root radius={3} display="flex" ref={ref} className={className}>
+        {header && (
+          <Header borderBottom paddingX={3} paddingY={4}>
+            <Heading size={1} textOverflow="ellipsis">
+              {header}
+            </Heading>
+          </Header>
+        )}
+        {children && <Content data-name="content">{children}</Content>}
+        {footer && (
+          <Footer sizing="border" borderTop={!hideFooterBorder}>
+            {footer}
+          </Footer>
+        )}
+      </Root>
+    )
+  }
+)
+
+DashboardWidget.displayName = 'DashboardWidget'

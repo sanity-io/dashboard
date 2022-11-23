@@ -1,17 +1,17 @@
+/* eslint-disable react/prop-types */
 import React from 'react'
 import styled, {css} from 'styled-components'
-import {Box, Card, Grid, Text} from '@sanity/ui'
-import {WidgetContainer} from '../containers/WidgetContainer'
-import {DashboardConfig, LayoutConfig, DashboardWidget} from '../types'
+import {Grid} from '@sanity/ui'
+import {WidgetContainer} from '../legacyParts'
 
 const media = {
-  small: (...args: Parameters<typeof css>) =>
+  small: (...args) =>
     css`
       @media (min-width: ${({theme}) => theme.sanity.media[0]}px) {
         ${css(...args)}
       }
     `,
-  medium: (...args: Parameters<typeof css>) =>
+  medium: (...args) =>
     css`
       @media (min-width: ${({theme}) => theme.sanity.media[2]}px) {
         ${css(...args)}
@@ -71,38 +71,28 @@ const Root = styled(Grid)`
   }
 `
 
-export interface WidgetGroupProps {
-  config: Partial<DashboardConfig>
-}
+function WidgetGroup(props) {
+  const config = props.config || {}
+  const widgets = config.widgets || []
+  const layout = config.layout || {}
 
-const NO_WIDGETS: DashboardWidget[] = []
-const NO_LAYOUT: LayoutConfig = {}
-
-export function WidgetGroup(props: WidgetGroupProps) {
-  const {
-    config: {layout = NO_LAYOUT, widgets = NO_WIDGETS},
-  } = props
   return (
     <Root
-      autoFlow="row dense"
+      autoFlow="dense"
       data-width={layout.width || 'auto'}
       data-height={layout.height || 'auto'}
+      data-name="sanity-dashboard-widget-group"
       gap={4}
     >
-      {widgets.length ? null : (
-        <Card padding={4} shadow={1} tone="primary">
-          <Text align="center">Add some widgets to populate this space.</Text>
-        </Card>
-      )}
       {widgets.map((widgetConfig, index) => {
         if (widgetConfig.type === '__experimental_group') {
-          return <WidgetGroup key={index} config={widgetConfig} />
+          return <WidgetGroup key={String(index)} config={widgetConfig} />
         }
-        if (widgetConfig.component) {
-          return <WidgetContainer key={index} {...widgetConfig} />
-        }
-        return <Box key={index}>{widgetConfig.name} is missing widget component</Box>
+
+        return <WidgetContainer key={String(index)} config={widgetConfig} />
       })}
     </Root>
   )
 }
+
+export default WidgetGroup

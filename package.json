@@ -1,6 +1,6 @@
 {
   "name": "@sanity/dashboard",
-  "version": "2.35.2",
+  "version": "2.36.0-v2-studio.1",
   "description": "Tool for rendering dashboard widgets",
   "keywords": [
     "sanity",

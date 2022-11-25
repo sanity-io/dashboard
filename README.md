@@ -1,23 +1,6 @@
-## Installation
+ Sanity Dashboard
 
-```
-npm install --save @sanity/dashboard@studio-v3
-```
-
-or
-
-```
-yarn add @sanity/dashboard@studio-v3
-```
-
-## Usage
-
-# Sanity Dashboard
-
-> **NOTE**
->
-> This is the **Sanity Studio v3 version** of @sanity/dashboard.
->
+> This is a **Sanity Studio v3** plugin.
 > For the v2 version, please refer to the [v2-branch](https://github.com/sanity-io/sanity/tree/next/packages/%40sanity/dashboard).
 
 ## What is it?
@@ -34,11 +17,11 @@ The Dashboard itself is mostly concerned about the layout of the configured widg
 
 In your Sanity Content Studio run:
 
-`npm install --save @sanity/dashboard@studio-v3`
+`npm install --save @sanity/dashboard`
 
 or
 
-`yarn add @sanity/dashboard@studio-v3`
+`yarn add @sanity/dashboard`
 
 ## Basic usage
 In `sanity.config.js` (or .ts), add the dashboard tool to the defineConfig plugins array:

@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.1.1](https://github.com/sanity-io/dashboard/compare/v3.1.0...v3.1.1) (2022-12-22)
+
+### Bug Fixes
+
+- **ui:** dashboard content overflowed layout ([0aa8cbe](https://github.com/sanity-io/dashboard/commit/0aa8cbed0d4775d667d51c86ea61e645c89c1b9a))
+
 ## [3.1.0](https://github.com/sanity-io/dashboard/compare/v3.0.0...v3.1.0) (2022-12-22)
 
 ### Features

@@ -1,4 +1,4 @@
-import React, {CSSProperties} from 'react'
+import React, {ComponentType, CSSProperties} from 'react'
 import {Dashboard} from './containers/Dashboard'
 import {definePlugin} from 'sanity'
 import {DashboardConfig, DashboardWidget, LayoutConfig} from './types'
@@ -25,7 +25,18 @@ const DashboardIcon = () => (
 )
 
 export interface DashboardPluginConfig {
+  /**
+   * Dashboard tool title
+   */
   title?: string
+  /**
+   * Dashboard tool name (used in url path)
+   */
+  name?: string
+  /**
+   * Dashboard tool icon
+   */
+  icon?: ComponentType
   widgets?: DashboardWidget[]
 
   /**
@@ -39,8 +50,10 @@ export const dashboardTool = definePlugin<DashboardPluginConfig>((config = {}) =
     layout: config.defaultLayout ?? {},
     widgets: config.widgets ?? [],
   }
-  
+
   const title = config.title ?? 'Dashboard'
+  const name = config.name ?? 'dashboard'
+  const icon = config.icon ?? DashboardIcon
 
   return {
     name: 'dashboard',
@@ -49,8 +62,8 @@ export const dashboardTool = definePlugin<DashboardPluginConfig>((config = {}) =
         ...prev,
         {
           title,
-          name: 'dashboard',
-          icon: DashboardIcon,
+          name,
+          icon,
           component: () => <Dashboard config={pluginConfig} />,
         },
       ]

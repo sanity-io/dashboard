@@ -25,6 +25,7 @@ const DashboardIcon = () => (
 )
 
 export interface DashboardPluginConfig {
+  title?: string
   widgets?: DashboardWidget[]
 
   /**
@@ -38,6 +39,8 @@ export const dashboardTool = definePlugin<DashboardPluginConfig>((config = {}) =
     layout: config.defaultLayout ?? {},
     widgets: config.widgets ?? [],
   }
+  
+  const title = config.title ?? 'Dashboard'
 
   return {
     name: 'dashboard',
@@ -45,7 +48,7 @@ export const dashboardTool = definePlugin<DashboardPluginConfig>((config = {}) =
       return [
         ...prev,
         {
-          title: 'Dashboard',
+          title,
           name: 'dashboard',
           icon: DashboardIcon,
           component: () => <Dashboard config={pluginConfig} />,

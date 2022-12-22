@@ -5,6 +5,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.1.0](https://github.com/sanity-io/dashboard/compare/v3.0.0...v3.1.0) (2022-12-22)
+
+### Features
+
+- make name and icon configurable ([6db4c65](https://github.com/sanity-io/dashboard/commit/6db4c6573d558881621b764a4c124a431a1071d8))
+- make title configurable ([36fcaf8](https://github.com/sanity-io/dashboard/commit/36fcaf8fa8274aa8724a2bd6ae33c0b50e5bfd6e))
+
 ## [3.0.0](https://github.com/sanity-io/dashboard/compare/v2.35.2...v3.0.0) (2022-11-25)
 
 ### ⚠ BREAKING CHANGES

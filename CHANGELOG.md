@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.1.2](https://github.com/sanity-io/dashboard/compare/v3.1.1...v3.1.2) (2023-01-04)
+
+### Bug Fixes
+
+- **deps:** applied npx @sanity/plugin-kit inject ([300067e](https://github.com/sanity-io/dashboard/commit/300067e12549d04817d1dae24a61992b57a426fa))
+
 ## [3.1.1](https://github.com/sanity-io/dashboard/compare/v3.1.0...v3.1.1) (2022-12-22)
 
 ### Bug Fixes

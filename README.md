@@ -70,6 +70,21 @@ Widgets can be configured by passing widget-specific config:
 projectUsersWidget({layout: 'medium'})
 ```
 
+You can change the name, title and icon of the dashboard tool should you want to - which also allows you to configure multiple dashboards with different configurations:
+
+```ts
+import { defineConfig } from "sanity";
+import { dashboardTool } from "@sanity/dashboard";
+import { ActivityIcon } from "@sanity/icons";
+
+dashboardTool({ 
+  name: "stats",
+  title: "Statistics",
+  icon: ActivityIcon,
+  widgets: [/* ... */]
+})
+```
+
 ## How to install a widget
 
 Install a Dashboard widget as you would any npm package.

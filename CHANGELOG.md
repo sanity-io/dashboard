@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.1.3](https://github.com/sanity-io/dashboard/compare/v3.1.2...v3.1.3) (2023-01-31)
+
+### Bug Fixes
+
+- **docs:** add instructions on customizing name, title, icon ([e7bb30b](https://github.com/sanity-io/dashboard/commit/e7bb30b34402d216d53a54fa65a37e098300fc6c))
+
 ## [3.1.2](https://github.com/sanity-io/dashboard/compare/v3.1.1...v3.1.2) (2023-01-04)
 
 ### Bug Fixes

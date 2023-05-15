@@ -60,7 +60,7 @@
     "@sanity/incompatible-plugin": "^1.0.4",
     "@sanity/ui": "^1.0.0",
     "lodash": "^4.17.21",
-    "rxjs": "^6.6.7"
+    "rxjs": "^7.0.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.2.0",

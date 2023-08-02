@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.1.5](https://github.com/sanity-io/dashboard/compare/v3.1.4...v3.1.5) (2023-08-02)
+
+### Bug Fixes
+
+- **deps:** update dependencies (non-major) ([#18](https://github.com/sanity-io/dashboard/issues/18)) ([657bcfc](https://github.com/sanity-io/dashboard/commit/657bcfc631355b5f53727998e6d8ab75539ce577))
+
 ## [3.1.4](https://github.com/sanity-io/dashboard/compare/v3.1.3...v3.1.4) (2023-05-03)
 
 ### Bug Fixes

@@ -24,7 +24,7 @@ const AvatarWrapper = styled(Card)`
 `
 
 function getInviteUrl(projectId: string) {
-  return `https://manage.sanity.io/projects/${projectId}/team/invite`
+  return `https://manage.sanity.io/projects/${projectId}/members`
 }
 
 interface Member {

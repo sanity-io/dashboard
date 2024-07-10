@@ -53,11 +53,20 @@ export function ProjectInfo(props: ProjectInfoProps) {
 
     subscriptions.push(
       versionedClient.observable
-        .request<{studioHost: string}>({uri: `/projects/${projectId}`})
+        .request<{
+          studioHost: string
+          metadata?: {externalStudioHost?: string}
+        }>({uri: `/projects/${projectId}`, tag: 'dashboard.project-info.studio-host'})
         .subscribe({
           next: (result) => {
-            const {studioHost: host} = result
-            setStudioHost(host ? `https://${host}.sanity.studio` : undefined)
+            if (result.metadata?.externalStudioHost) {
+              setStudioHost(result.metadata.externalStudioHost)
+              return
+            }
+
+            setStudioHost(
+              result.studioHost ? `https://${result.studioHost}.sanity.studio` : undefined,
+            )
           },
           error: (error) => {
             console.error('Error while looking for studioHost', error)

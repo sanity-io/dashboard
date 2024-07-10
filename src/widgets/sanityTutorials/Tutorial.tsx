@@ -1,7 +1,7 @@
 import React from 'react'
 import {Card, Box, Heading, Flex, Text, Stack} from '@sanity/ui'
 import {PlayIcon} from '@sanity/icons'
-import styled from 'styled-components'
+import {styled} from 'styled-components'
 
 const PlayIconBox = styled(Box)`
   position: absolute;

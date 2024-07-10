@@ -1,6 +1,6 @@
 import React, {forwardRef} from 'react'
 import {Card, Box, Heading} from '@sanity/ui'
-import styled from 'styled-components'
+import {styled} from 'styled-components'
 
 const Root = styled(Card)`
   display: flex;

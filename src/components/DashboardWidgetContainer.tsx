@@ -49,7 +49,7 @@ interface DashboardWidgetProps {
 
 export const DashboardWidgetContainer = forwardRef(function DashboardWidgetContainer(
   props: DashboardWidgetProps,
-  ref: React.Ref<HTMLDivElement>
+  ref: React.Ref<HTMLDivElement>,
 ) {
   const {header, children, footer} = props
 

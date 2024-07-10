@@ -10,7 +10,7 @@ export function WidgetContainer(props: DashboardWidget) {
       ...(props.layout || {}),
       ...(config.layout || {}),
     }),
-    [props.layout, config.layout]
+    [props.layout, config.layout],
   )
 
   return (

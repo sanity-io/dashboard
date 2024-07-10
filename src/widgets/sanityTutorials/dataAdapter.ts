@@ -43,6 +43,6 @@ export function useDataAdapter() {
       },
       urlBuilder: imageUrlBuilder(tutorialsProjectConfig),
     }),
-    [versionedClient]
+    [versionedClient],
   )
 }

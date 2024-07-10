@@ -55,17 +55,17 @@ export function ProjectUsers() {
       .pipe(
         switchMap((_project) =>
           from(userStore.getUsers(_project.members.map((mem) => mem.id))).pipe(
-            map((_users) => ({project: _project, users: _users}))
-          )
-        )
+            map((_users) => ({project: _project, users: _users})),
+          ),
+        ),
       )
       .subscribe({
         next: ({users: _users, project: _project}) => {
           setProject(_project)
           setUsers(
             (Array.isArray(_users) ? _users : [_users]).sort((userA, userB) =>
-              sortUsersByRobotStatus(userA, userB, _project)
-            )
+              sortUsersByRobotStatus(userA, userB, _project),
+            ),
           )
         },
         error: (e: Error) => setError(e),

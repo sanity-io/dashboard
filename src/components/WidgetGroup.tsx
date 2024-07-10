@@ -5,18 +5,16 @@ import {WidgetContainer} from '../containers/WidgetContainer'
 import {DashboardConfig, LayoutConfig, DashboardWidget} from '../types'
 
 const media = {
-  small: (...args: Parameters<typeof css>) =>
-    css`
-      @media (min-width: ${({theme}) => theme.sanity.media[0]}px) {
-        ${css(...args)}
-      }
-    `,
-  medium: (...args: Parameters<typeof css>) =>
-    css`
-      @media (min-width: ${({theme}) => theme.sanity.media[2]}px) {
-        ${css(...args)}
-      }
-    `,
+  small: (...args: Parameters<typeof css>) => css`
+    @media (min-width: ${({theme}) => theme.sanity.media[0]}px) {
+      ${css(...args)}
+    }
+  `,
+  medium: (...args: Parameters<typeof css>) => css`
+    @media (min-width: ${({theme}) => theme.sanity.media[2]}px) {
+      ${css(...args)}
+    }
+  `,
 }
 
 const Root = styled(Grid)`

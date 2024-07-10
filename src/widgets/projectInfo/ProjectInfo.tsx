@@ -65,7 +65,7 @@ export function ProjectInfo(props: ProjectInfoProps) {
               error: 'Something went wrong while looking up studioHost. See console.',
             })
           },
-        })
+        }),
     )
 
     // ping assumed graphql endpoint
@@ -87,7 +87,7 @@ export function ProjectInfo(props: ProjectInfoProps) {
               })
             }
           },
-        })
+        }),
     )
 
     return () => {
@@ -129,7 +129,7 @@ export function ProjectInfo(props: ProjectInfoProps) {
           ],
         },
       ],
-      data.filter((item) => item.category === 'apis')
+      data.filter((item) => item.category === 'apis'),
     )
 
     // Handle whatever else there might be

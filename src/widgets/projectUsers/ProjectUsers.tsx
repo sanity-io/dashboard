@@ -1,36 +1,23 @@
 import React, {useCallback, useEffect, useState} from 'react'
 import {from} from 'rxjs'
 import {map, switchMap} from 'rxjs/operators'
-import {Stack, Spinner, Card, Box, Text, Button} from '@sanity/ui'
-import {RobotIcon} from '@sanity/icons'
-import {styled} from 'styled-components'
-import {DefaultPreview, useUserStore} from 'sanity'
+import {Stack, Spinner, Box, Text, Button} from '@sanity/ui'
+import {Role, useUserStore} from 'sanity'
 import {useVersionedClient} from '../../versionedClient'
 import {User} from 'sanity'
 import {DashboardWidgetContainer} from '../../components/DashboardWidgetContainer'
-
-const AvatarWrapper = styled(Card)`
-  box-sizing: border-box;
-  border-radius: 50%;
-  border-color: transparent;
-  overflow: hidden;
-  width: 100%;
-  height: 100%;
-
-  & > img {
-    width: 100%;
-    height: auto;
-  }
-`
+import {ProjectUser} from './ProjectUser'
 
 function getInviteUrl(projectId: string) {
-  return `https://manage.sanity.io/projects/${projectId}/team/invite`
+  return `https://manage.sanity.io/projects/${projectId}/members`
 }
 
 interface Member {
   id: string
-  role: string
+  roles: Role[]
   isRobot: boolean
+  isCurrentUser: boolean
+  createdAt: string
 }
 
 interface Project {
@@ -106,7 +93,7 @@ export function ProjectUsers() {
           paddingY={4}
           mode="bleed"
           tone="primary"
-          text="Invite members"
+          text="Manage members"
           as="a"
           loading={isLoading}
           href={isLoading ? undefined : getInviteUrl(project.id)}
@@ -120,7 +107,7 @@ export function ProjectUsers() {
               <Spinner />
             </Text>
             <Text align="center" size={1} muted>
-              Loading items...
+              Loading items…
             </Text>
           </Stack>
         </Box>
@@ -130,23 +117,13 @@ export function ProjectUsers() {
         <Stack space={3} padding={3}>
           {users?.map((user) => {
             const membership = project.members.find((member) => member.id === user.id)
-            const media = membership?.isRobot ? (
-              <Text size={3}>
-                <RobotIcon />
-              </Text>
-            ) : (
-              <AvatarWrapper tone="transparent">
-                {user?.imageUrl && <img src={user.imageUrl} alt={user?.displayName} />}
-              </AvatarWrapper>
-            )
             return (
-              <Box key={user.id}>
-                <DefaultPreview
-                  title={user.displayName}
-                  subtitle={membership?.role}
-                  media={media}
-                />
-              </Box>
+              <ProjectUser
+                key={user.id}
+                user={user}
+                isRobot={membership?.isRobot ?? false}
+                roles={membership?.roles.map((role) => role.title) || []}
+              />
             )
           })}
         </Stack>
@@ -159,11 +136,12 @@ function sortUsersByRobotStatus(userA: User, userB: User, project: Project) {
   const {members} = project
   const membershipA = members.find((member) => member.id === userA?.id)
   const membershipB = members.find((member) => member.id === userB?.id)
-  if (membershipA?.isRobot) {
-    return 1
+
+  // On ties, sort by when the user was added
+  if (membershipA?.isRobot === membershipB?.isRobot) {
+    return (membershipA?.createdAt || '') > (membershipB?.createdAt || '') ? 1 : -1
   }
-  if (membershipB?.isRobot) {
-    return -1
-  }
-  return 0
+
+  // Robots go to the bottom
+  return membershipA?.isRobot ? 1 : -1
 }

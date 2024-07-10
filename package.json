@@ -46,6 +46,7 @@
     "build": "plugin-kit verify-package --silent && pkg-utils build --strict --check --clean",
     "clean": "rimraf lib",
     "compile": "tsc --noEmit",
+    "dev": "sanity dev",
     "format": "prettier --write --cache --ignore-unknown .",
     "link-watch": "plugin-kit link-watch",
     "lint": "eslint .",
@@ -58,7 +59,7 @@
     "@sanity/icons": "^3.3.0",
     "@sanity/image-url": "^1.0.2",
     "@sanity/incompatible-plugin": "^1.0.4",
-    "@sanity/ui": "^2.6.3",
+    "@sanity/ui": "^2.6.8",
     "lodash": "^4.17.21",
     "rxjs": "^7.8.1"
   },
@@ -86,7 +87,7 @@
     "react-dom": "^18.3.1",
     "react-is": "^18.3.1",
     "rimraf": "^6.0.0",
-    "sanity": "^3.49.0",
+    "sanity": "^3.50.0",
     "styled-components": "^6.1.11",
     "typescript": "^5.5.3"
   },

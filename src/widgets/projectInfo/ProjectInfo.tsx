@@ -83,6 +83,7 @@ export function ProjectInfo(props: ProjectInfoProps) {
         .request({
           method: 'HEAD',
           uri: `/graphql/${dataset}/default`,
+          tag: 'dashboard.project-info.graphql-api',
         })
         .subscribe({
           next: () => setGraphQlApi(getGraphQlUrl(projectId, dataset)),

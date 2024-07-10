@@ -38,6 +38,7 @@ export function ProjectUsers() {
     const subscription = versionedClient.observable
       .request<Project>({
         uri: `/projects/${projectId}`,
+        tag: 'dashboard.project-users',
       })
       .pipe(
         switchMap((_project) =>

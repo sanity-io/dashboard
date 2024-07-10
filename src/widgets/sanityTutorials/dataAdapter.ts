@@ -38,6 +38,7 @@ export function useDataAdapter() {
           : '/addons/dashboard'
         return versionedClient.observable.request<{items: FeedItem[]}>({
           uri,
+          tag: 'dashboard.sanity-tutorials',
           withCredentials: false,
         })
       },

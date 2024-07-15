@@ -5,6 +5,25 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.0](https://github.com/sanity-io/dashboard/compare/v3.1.6...v4.0.0) (2024-07-15)
+
+### ⚠ BREAKING CHANGES
+
+- This module now requires the peer dependency `styled-components` greater than or
+  equal to version 6.1. This aligns with Sanity v3.37.0 and higher.
+- This module now requires Node.js 18 or higher.
+  This shouldn't really impact anyone beyond developers of the module, since this really only applies
+  to the build tooling.
+
+### Bug Fixes
+
+- add request tags for all dashboard widget api requests ([528b92d](https://github.com/sanity-io/dashboard/commit/528b92dc2f1869d2d1fcff46000cb1b78aae675f))
+- **projectInfo:** show external studio host if present ([36c6882](https://github.com/sanity-io/dashboard/commit/36c688211145e3dbed283b28f97898d13d6d77ef))
+- **projectUsers:** show all of a users' roles, fix invite link + text ([4699add](https://github.com/sanity-io/dashboard/commit/4699add5706e3381d59c8d70353d30a7ce1b4123))
+- require styled-components ^6.1, node >= 18 ([b0d9cb6](https://github.com/sanity-io/dashboard/commit/b0d9cb6726ec68d97550d1a465196835f463366d))
+- upgrade build tooling, es/cjs export definitions ([21eaa29](https://github.com/sanity-io/dashboard/commit/21eaa29847b7157881d98c171fbaca74865cce17))
+- use named import for styled-components ([5eec15a](https://github.com/sanity-io/dashboard/commit/5eec15ad6a9fdfae4d05b186576459bf302d3898))
+
 ## [3.1.6](https://github.com/sanity-io/dashboard/compare/v3.1.5...v3.1.6) (2023-11-30)
 
 ### Bug Fixes

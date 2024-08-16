@@ -1,5 +1,5 @@
 import {ProjectInfo} from './ProjectInfo'
-import {LayoutConfig, DashboardWidget} from '../../types'
+import {type LayoutConfig, type DashboardWidget} from '../../types'
 
 export function projectInfoWidget(config?: {layout?: LayoutConfig}): DashboardWidget {
   return {

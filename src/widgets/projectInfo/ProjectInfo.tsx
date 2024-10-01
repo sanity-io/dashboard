@@ -4,29 +4,14 @@ import {useVersionedClient} from '../../versionedClient'
 import {Subscription} from 'rxjs'
 import {WidgetContainer} from '../../containers/WidgetContainer'
 import {DashboardWidgetContainer} from '../../components/DashboardWidgetContainer'
-import {DashboardWidget} from '../../types'
-
-export interface ProjectInfoProps {
-  __experimental_before?: DashboardWidget[]
-  data: ProjectData[]
-}
-
-interface App {
-  title: string
-  rows?: App[]
-  value?: string | {error: string}
-}
-
-interface ProjectData {
-  title: string
-  category?: string
-}
+import {type DashboardWidget} from '../../types'
+import {type App, type ProjectInfoProps, type ProjectData, UserApplication} from './types'
 
 function isUrl(url?: string) {
   return url && /^https?:\/\//.test(`${url}`)
 }
 
-function getGraphQlUrl(projectId: string, dataset: string) {
+function getGraphQLUrl(projectId: string, dataset: string) {
   return `https://${projectId}.api.sanity.io/v1/graphql/${dataset}/default`
 }
 
@@ -43,8 +28,8 @@ const NO_DATA: ProjectData[] = []
 
 export function ProjectInfo(props: ProjectInfoProps) {
   const {__experimental_before = NO_EXPERIMENTAL, data = NO_DATA} = props
-  const [studioHost, setStudioHost] = useState<string | {error: string} | undefined>()
-  const [graphqlApi, setGraphQlApi] = useState<string | {error: string} | undefined>()
+  const [studioApps, setStudioApps] = useState<UserApplication[] | {error: string} | undefined>()
+  const [graphQLApi, setGraphQLApi] = useState<string | {error: string} | undefined>()
   const versionedClient = useVersionedClient()
   const {projectId = 'unknown', dataset = 'unknown'} = versionedClient.config()
 
@@ -53,25 +38,13 @@ export function ProjectInfo(props: ProjectInfoProps) {
 
     subscriptions.push(
       versionedClient.observable
-        .request<{
-          studioHost: string
-          metadata?: {externalStudioHost?: string}
-        }>({uri: `/projects/${projectId}`, tag: 'dashboard.project-info.studio-host'})
+        .request<UserApplication[]>({uri: '/user-applications', tag: 'dashboard.project-info'})
         .subscribe({
-          next: (result) => {
-            if (result.metadata?.externalStudioHost) {
-              setStudioHost(result.metadata.externalStudioHost)
-              return
-            }
-
-            setStudioHost(
-              result.studioHost ? `https://${result.studioHost}.sanity.studio` : undefined,
-            )
-          },
+          next: (result) => setStudioApps(result.filter((app) => app.type === 'studio')),
           error: (error) => {
-            console.error('Error while looking for studioHost', error)
-            setStudioHost({
-              error: 'Something went wrong while looking up studioHost. See console.',
+            console.error('Error while resolving user applications', error)
+            setStudioApps({
+              error: 'Something went wrong while resolving user applications. See console.',
             })
           },
         }),
@@ -86,14 +59,14 @@ export function ProjectInfo(props: ProjectInfoProps) {
           tag: 'dashboard.project-info.graphql-api',
         })
         .subscribe({
-          next: () => setGraphQlApi(getGraphQlUrl(projectId, dataset)),
+          next: () => setGraphQLApi(getGraphQLUrl(projectId, dataset)),
           error: (error) => {
             if (error.statusCode === 404) {
-              setGraphQlApi(undefined)
+              setGraphQLApi(undefined)
             } else {
-              console.error('Error while looking for graphqlApi', error)
-              setGraphQlApi({
-                error: 'Something went wrong while looking up graphqlApi. See console.',
+              console.error('Error while looking for graphQLApi', error)
+              setGraphQLApi({
+                error: 'Something went wrong while looking up graphQLApi. See console.',
               })
             }
           },
@@ -103,7 +76,7 @@ export function ProjectInfo(props: ProjectInfoProps) {
     return () => {
       subscriptions.forEach((s) => s.unsubscribe())
     }
-  }, [dataset, projectId, versionedClient, setGraphQlApi, setStudioHost])
+  }, [dataset, projectId, versionedClient, setGraphQLApi])
 
   const assembleTableRows = useMemo(() => {
     let result: App[] = [
@@ -116,11 +89,16 @@ export function ProjectInfo(props: ProjectInfoProps) {
       },
     ]
 
-    // Handle any apps
-    const apps: App[] = [
-      studioHost ? {title: 'Studio', value: studioHost} : null,
-      ...data.filter((item) => item.category === 'apps'),
-    ].filter((a): a is App => !!a)
+    const apps: App[] = data.filter((item) => item.category === 'apps')
+
+    // Handle studios
+    ;(Array.isArray(studioApps) ? studioApps : []).forEach((app) => {
+      apps.push({
+        title: app.title || 'Studio',
+        value: app.urlType === 'internal' ? `https://${app.appHost}.sanity.studio` : app.appHost,
+      })
+    })
+
     if (apps.length > 0) {
       result = result.concat([{title: 'Apps', rows: apps}])
     }
@@ -134,7 +112,7 @@ export function ProjectInfo(props: ProjectInfoProps) {
             {title: 'GROQ', value: getGroqUrl(projectId, dataset)},
             {
               title: 'GraphQL',
-              value: (typeof graphqlApi === 'object' ? 'Error' : graphqlApi) ?? 'Not deployed',
+              value: (typeof graphQLApi === 'object' ? 'Error' : graphQLApi) ?? 'Not deployed',
             },
           ],
         },
@@ -157,7 +135,7 @@ export function ProjectInfo(props: ProjectInfoProps) {
     })
 
     return result
-  }, [graphqlApi, studioHost, projectId, dataset, data])
+  }, [graphQLApi, studioApps, projectId, dataset, data])
 
   return (
     <>
@@ -207,7 +185,7 @@ export function ProjectInfo(props: ProjectInfoProps) {
                     <Stack space={4} paddingX={3} role="rowgroup">
                       {item.rows.map((row) => {
                         return (
-                          <Grid key={row.title} columns={2} role="row">
+                          <Grid key={`${row.value}-${row.title}`} columns={2} role="row">
                             <Text weight="medium" role="rowheader">
                               {row.title}
                             </Text>

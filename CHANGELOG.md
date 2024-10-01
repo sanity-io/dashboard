@@ -5,6 +5,16 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.1.0](https://github.com/sanity-io/dashboard/compare/v4.0.0...v4.1.0) (2024-10-01)
+
+### Features
+
+- list all studios from user applications list ([#62](https://github.com/sanity-io/dashboard/issues/62)) ([f757d58](https://github.com/sanity-io/dashboard/commit/f757d58b7c7a6b5b61dd4c77de253102f22fda33))
+
+### Bug Fixes
+
+- **deps:** update non-major ([#60](https://github.com/sanity-io/dashboard/issues/60)) ([13b4b5a](https://github.com/sanity-io/dashboard/commit/13b4b5a499e22e54d3162b15757d54b3189f2170))
+
 ## [4.0.0](https://github.com/sanity-io/dashboard/compare/v3.1.6...v4.0.0) (2024-07-15)
 
 ### ⚠ BREAKING CHANGES

@@ -5,6 +5,14 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.1.1](https://github.com/sanity-io/dashboard/compare/v4.1.0...v4.1.1) (2024-12-11)
+
+### Bug Fixes
+
+- **deps:** silence audit warnings ([957f4cf](https://github.com/sanity-io/dashboard/commit/957f4cf21f4e4b4534c87d37e3b19d4c2e619f00))
+- **deps:** upgrade sanity dev dependency ([#64](https://github.com/sanity-io/dashboard/issues/64)) ([7b9ff32](https://github.com/sanity-io/dashboard/commit/7b9ff3290b40997539d50f7864a77fdedcbf8762))
+- flag compatibility with React 19 ([f4ef8ed](https://github.com/sanity-io/dashboard/commit/f4ef8ed22dc230f97c050c2fb964f1999fe67816))
+
 ## [4.1.0](https://github.com/sanity-io/dashboard/compare/v4.0.0...v4.1.0) (2024-10-01)
 
 ### Features

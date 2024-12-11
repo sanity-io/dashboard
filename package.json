@@ -97,9 +97,6 @@
     "sanity": "^3",
     "styled-components": "^6.1"
   },
-  "optionalDependencies": {
-    "@rollup/rollup-linux-x64-gnu": "^4.28.1"
-  },
   "engines": {
     "node": ">=18"
   },

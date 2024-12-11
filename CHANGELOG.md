@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.1.2](https://github.com/sanity-io/dashboard/compare/v4.1.1...v4.1.2) (2024-12-11)
+
+### Bug Fixes
+
+- **deps:** bump `[@sanity](https://github.com/sanity)` dependencies to react 19-compatible versions ([70442e9](https://github.com/sanity-io/dashboard/commit/70442e91c39ca14d8693f1715e84ea4a2286c0f5))
+
 ## [4.1.1](https://github.com/sanity-io/dashboard/compare/v4.1.0...v4.1.1) (2024-12-11)
 
 ### Bug Fixes

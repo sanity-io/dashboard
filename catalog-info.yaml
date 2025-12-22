@@ -1,0 +1,23 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: dashboard
+  title: dashboard
+  description: Tool for rendering dashboard widgets
+  annotations:
+    circleci.com/project-slug: github/sanity-io/dashboard
+    github.com/project-slug: sanity-io/dashboard
+    grafana/tag-selector: dashboard
+    sentry.io/project-slug: dashboard
+    socket.dev/repo-slug: sanity-io/dashboard
+  tags:
+    - typescript
+  links:
+    - url: https://github.com/sanity-io/dashboard
+      title: Source Code
+      icon: github
+spec:
+  type: service
+  owner: group:default/dashboard
+  lifecycle: production
+  system: system:default/frontend
